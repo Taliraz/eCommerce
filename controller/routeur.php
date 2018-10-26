@@ -7,4 +7,5 @@ if(isset($_GET['action'])) {
 else { 
 	$action="readAll"; 
 } 
+ControllerProduit::$action();
 ?>
