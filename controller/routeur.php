@@ -1,5 +1,10 @@
 <?php
-require_once (File::build_path(array("controller","ControllerProduit.php")));
-$action = $_GET['action'];
-ControllerProduit::$action(); 
+
+require (File::build_path(array("controller","ControllerProduit.php")));
+if(isset($_GET['action'])) {
+    $action = $_GET['action'];  
+}
+else { 
+	$action="readAll"; 
+} 
 ?>
