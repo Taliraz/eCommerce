@@ -1,85 +1,85 @@
 <?php
 require_once File::build_path(array("model","Model.php"));
 class ModelProduit{
-	private $id;
-	private $nom;
-	private $prix;
-	private $origine;
-	private $poid;
-	private $couleur;
-	private $pays;
-	private $image;
+	private $idProduit;
+	private $nomProduit;
+	private $prixProduit;
+	private $origineProduit;
+	private $poidProduit;
+	private $couleurProduit;
+	private $paysProduit;
+	private $imageProduit;
 
 	public function __construct($n=NULL,$pr=NULL,$o=NULL,$po=NULL,$c=NULL,$pa=NULL,$i=NULL){
 		if (!is_null($n) && !is_null($pr) && !is_null($ca) && !is_null($po) && !is_null($co) && !is_null($pa)){
-			$this->nom=$n;
-			$this->prix=$pr;
-			$this->origine=$o;
-			$this->poid=$po;
-			$this->couleur=$c;
-			$this->pays=$pa;
-			$this->image=$i;
+			$this->nomProduit=$n;
+			$this->prixProduit=$pr;
+			$this->origineProduit=$o;
+			$this->poidProduit=$po;
+			$this->couleurProduit=$c;
+			$this->paysProduit=$pa;
+			$this->imageProduit=$i;
 		}
 	}
 
 	public function getId(){
-		return $this->id;
+		return $this->idProduit;
 	}
 
 	public function getNom(){
-		return $this->nom;
+		return $this->nomProduit;
 	}
 
 	public function getPrix(){
-		return $this->prix;
+		return $this->prixProduit;
 	}
 
 	public function getOrigine(){
-		return $this->origine;
+		return $this->origineProduit;
 	}
 
 	public function getPoid(){
-		return $this->poid;
+		return $this->poidProduit;
 	}
 
 	public function getCouleur(){
-		return $this->couleur;
+		return $this->couleurProduit;
 	}
 
 	public function getPays(){
-		return $this->pays;
+		return $this->paysProduit;
 	}
 
 	public function getImage(){
-		return $this->image;
+		return $this->imageProduit;
 	}
 
 	public function setNom($Pnom){
-		$this->nom=$Pnom;
+		$this->nomProduit=$Pnom;
 	}
 
 	public function setPrix($Pprix){
-		$this->prix=$Pprix;
+		$this->prixProduit=$Pprix;
 	}
 
 	public function setOrigine($Porigine){
-		$this->origine=$Porigine;
+		$this->origineProduit=$Porigine;
 	}
 
 	public function setPoid($Ppoid){
-		$this->poid=$Ppoid;
+		$this->poidProduit=$Ppoid;
 	}
 
 	public function setCouleur($Pcouleur){
-		$this->couleur=$Pcouleur;
+		$this->couleurProduit=$Pcouleur;
 	}
 
 	public function setPays($Ppays){
-		$this->pays=$Ppays;
+		$this->paysProduit=$Ppays;
 	}
 
 	public function setImage($Pimage){
-		$this->image=$Pimage;
+		$this->imageProduit=$Pimage;
 	}
 
 	public static function getAllProduits(){

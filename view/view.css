@@ -1,0 +1,13 @@
+.liste_produits {
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+}
+
+.elements { 
+	list-style: none;
+}
+
+.image_param {
+	width: 70px;
+}
