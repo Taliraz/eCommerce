@@ -38,8 +38,8 @@ class ControllerProduit {
     $poidProduit=$_POST['poidProduit'];
     $unite=$_POST['unite'];
     $poidFinal=intval($poidProduit)*intval($unite);
-    var_dump($poidFinal);
-    $ModelProduit=new ModelProduit($_POST['nomProduit'],$_POST['prixProduit'],$_POST['origineProduit'],$poidFinal,$_POST['couleurProduit'],$_POST['paysProduit'],$_POST['imageProduit']);
+    $imageProduit="http://webinfo.iutmontp.univ-montp2.fr/~armangaus/eCommerce/img/".$_POST['imageProduit'];
+    $ModelProduit=new ModelProduit($_POST['nomProduit'],$_POST['prixProduit'],$_POST['origineProduit'],$poidFinal,$_POST['couleurProduit'],$_POST['paysProduit'],$imageProduit);
     $ModelProduit->save();
     $controller='produit';
     $view='created';
