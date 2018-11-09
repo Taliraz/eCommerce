@@ -35,11 +35,18 @@ class ControllerProduit {
     }
 
    public static function created(){
+    if (!empty($_FILES['fichier']) && is_uploaded_file($_FILES['fichier']['tmp_name'])) {
+        $name = $_FILES['fichier']['name'];
+        $pic_path = File::build_path(array("img","$name"));
+        if (!move_uploaded_file($_FILES['fichier']['tmp_name'], $pic_path)) {
+          echo "La copie a échoué";
+        }
+    }
     $poidProduit=$_POST['poidProduit'];
     $unite=$_POST['unite'];
     $poidFinal=intval($poidProduit)*intval($unite);
-    var_dump($poidFinal);
-    $ModelProduit=new ModelProduit($_POST['nomProduit'],$_POST['prixProduit'],$_POST['origineProduit'],$poidFinal,$_POST['couleurProduit'],$_POST['paysProduit'],$_POST['imageProduit']);
+    $imageProduit="http://webinfo.iutmontp.univ-montp2.fr/~armangaus/eCommerce/img/".$name;
+    $ModelProduit=new ModelProduit($_POST['nomProduit'],$_POST['prixProduit'],$_POST['origineProduit'],$poidFinal,$_POST['couleurProduit'],$_POST['paysProduit'],$imageProduit);
     $ModelProduit->save();
     $controller='produit';
     $view='created';

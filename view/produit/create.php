@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <body>
-       <form method="post" action="index.php?action=created">
+       <form method="post" action="index.php?action=created" enctype="multipart/form-data">
         <fieldset>
           <legend><h2>Formulaire :</h2></legend>
           <p>
@@ -297,8 +297,8 @@
               </select>
               <br>
               <br>
-              <label for="coulProd_id">Image du Produit</label> :
-              <input type="file" name="imageProduit" id="imgProd_id" required/>
+              <label for="imgProd_id">Image du Produit</label> :
+              <input type="file" name="fichier"  required/>
           </p>
           <p>
               <input type="submit" value="Envoyer" />
