@@ -84,7 +84,7 @@ class ModelProduit{
 
 	public static function getAllProduits(){
 		$pdo=Model::$pdo;
-		$rep=$pdo->query("SELECT * FROM P_Produits");
+		$rep=$pdo->query("SELECT * FROM P_Produit");
 		$rep->setFetchMode(PDO::FETCH_CLASS,'ModelProduit');
 		$tab_produit=$rep->fetchAll();
 		return $tab_produit;

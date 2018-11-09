@@ -4,7 +4,7 @@ class ControllerProduit {
 
 
 	public static function readAll() {
-        $tab_p = ModelProduit::getAllProduit();    
+        $tab_p = ModelProduit::getAllProduits();    
         $controller='produit';
         $view='list';
         $pagetitle='liste des Produits';
