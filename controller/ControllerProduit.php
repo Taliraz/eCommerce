@@ -35,12 +35,13 @@ class ControllerProduit {
     }
 
    public static function created(){
-      $ModelProduit=new ModelProduit($_POST['nom'],$_POST['prix'],$_POST['origine'],$_POST['poid'],$_POST['couleur'],$_POST['pays'],$_POST['image']);
-      $ModelProduit->save();
-      $controller='produit';
-      $view='created';
-      $pagetitle='Produit créé';
-      require(File::build_path(array("view","view.php")));
+    $poidFinal=$_POST('poidProduit')*$_POST('unite');
+    $ModelProduit=new ModelProduit($_POST['nomProduit'],$_POST['prixProduit'],$_POST['origineProduit'],$poidFinal,$_POST['couleurProduit'],$_POST['paysProduit'],$_POST['imageProduit']);
+    $ModelProduit->save();
+    $controller='produit';
+    $view='created';
+    $pagetitle='Produit créé';
+    require(File::build_path(array("view","view.php")));
     }
 
     public static function delete(){
