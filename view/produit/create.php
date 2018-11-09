@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <body>
-      <form method="post" action="index.php?action=created">
+       <form method="post" action="index.php?action=created">
         <fieldset>
           <legend><h2>Formulaire :</h2></legend>
           <p>
@@ -26,10 +26,10 @@
             <br>
 
             <label for="poidProd_id">Poid du Produit</label> :
-            <input type="text" placeholder="" name="poidProduit" id="poidProd_id" required/>
+            <input type="number" placeholder="" name="poidProduit" id="poidProd_id" required/>
             <select name="unite">
-              <option value="1000">Kg</option>
-              <option value="1">g</option>
+              <option value="1000" >Kg</option>
+              <option value="1" >g</option>
             </select>
             <br>
             <br>
@@ -40,7 +40,7 @@
             <br>
 
             <label for="paysProd_id">Pays du Produit</label> :
-            <select name="pays">
+            <select name="paysProduit">
               <option value="Afghanistan">Afghanistan </option>
               <option value="Afrique_Centrale">Afrique Centrale </option>
               <option value="Afrique_du_sud">Afrique du Sud </option>
