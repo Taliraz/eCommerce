@@ -1,29 +1,38 @@
-
-<ul class="liste_produits">
+<table id="liste_produits" border="0" cellspacing="0" cellpadding="0">
+	<tr class="infos">
+		<th  style="border: 0px 1px;" class="image"></th>
+		<th  style="border: 0px 1px;" class="nom">Nom</th>
+		<th  style="border: 0px 1px;" class="poids">Poids</th>
+		<th  style="border: 0px 1px;" class="couleur">Couleur</th>
+		<th class="prix">Prix</th>
+		<th></th>
+		<th></th>
+	</tr>
 	<?php foreach($tab_p as $key){
-		echo 
-		'<span class="line"></span>
-		<li class="produit">'.htmlspecialchars($key->getNom()).'<li>
-			<ul class="elements">
-				<li class="image">
+		echo '
+		<tr class="elements">
+				<td class="image">
 				<img src="'.$key->getImage().'"alt="'.$key->getId().'" class="image_param">
-				</li>
-				<li class="poids">
+				</td>
+				<td style="border: 0px 1px;" class="produit">
+				'.$key->getNom().'
+				</td>
+				<td class="poids">
 				'.htmlspecialchars($key->getPoid()).'
-				</li>
-				<li class="couleur">
+				</td>
+				<td class="couleur">
 				'.htmlspecialchars($key->getCouleur()).'
-				</li>
-				<li class="prix">
+				</td>
+				<td class="prix">
 				'.htmlspecialchars($key->getPrix()).'
-				</li>
-				<li class="details">
-				Voir
-				</li>
-				<li class="achat">
-				Ajouter au Panier
-				</li>
-			</ul>
-			<span class="line"></span>';
+				</td>
+				<td class="details">
+				<a href="#">Voir</a>
+				</td>
+				<td class="achat">
+				<a href="#">Ajouter au Panier</a>
+				</td>
+			</tr>';
 	} ?>
-</ul>
+
+</table>
