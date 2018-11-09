@@ -11,6 +11,5 @@
             require $filepath;
         ?>
         </div>
-        <p style="border: 1px solid black;text-align:right;padding-right:1em;background-color:pink;"> caillou</p>
     </body>
 </html>

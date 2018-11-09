@@ -11,16 +11,6 @@ class ModelProduit{
 	private $imageProduit;
 
 	public function __construct($n=NULL,$pr=NULL,$o=NULL,$po=NULL,$c=NULL,$pa=NULL,$i=NULL){
-<<<<<<< HEAD
-		if (!is_null($n) && !is_null($pr) && !is_null($ca) && !is_null($po) && !is_null($co) && !is_null($pa)){
-			$this->nomProduit=$n;
-			$this->prixProduit=$pr;
-			$this->origineProduit=$o;
-			$this->poidProduit=$po;
-			$this->couleurProduit=$c;
-			$this->paysProduit=$pa;
-			$this->imageProduit=$i;
-=======
 		if (!is_null($n) && !is_null($pr) && !is_null($o) && !is_null($po) && !is_null($c) && !is_null($pa)){
 			$this->nom=$n;
 			$this->prix=$pr;
@@ -29,7 +19,6 @@ class ModelProduit{
 			$this->couleur=$c;
 			$this->pays=$pa;
 			$this->image=$i;
->>>>>>> 6ed6f83faa6887faa0fc6d43bb007d6dfca9f78e
 		}
 	}
 
@@ -95,7 +84,7 @@ class ModelProduit{
 
 	public static function getAllProduits(){
 		$pdo=Model::$pdo;
-		$rep=$pdo->query("SELECT * FROM P_Produit");
+		$rep=$pdo->query("SELECT * FROM P_Produits");
 		$rep->setFetchMode(PDO::FETCH_CLASS,'ModelProduit');
 		$tab_produit=$rep->fetchAll();
 		return $tab_produit;
