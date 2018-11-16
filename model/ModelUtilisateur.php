@@ -3,13 +3,17 @@ require(File::build_path(array("model","Model.php")));
 class ModelUtilisateur {
     
     protected $idUtilisateur;
-    protected $login;
-    protected $mdp;
+    protected $loginUtilisateur;
+    protected $mdpUtilisateur;
+    protected $nomUtilisateur;
+    protected $prenomUtilisateur;
     
-    public function __construct($login = NULL, $mdp = NULL){
-        if(!is_null($login) && !is_null($mdp)){
-            $this->login = $login;
-            $this->mdp = $mdp; 
+    public function __construct($login = NULL, $mdp = NULL, $nom = NULL, $prenom = NULL){
+        if(!is_null($login) && !is_null($mdp) && !is_null($nom) && !is_null($prenom)){
+            $this->loginUtilisateur = $login;
+            $this->mdpUtilisateur = $mdp; 
+            $this->nomUtilisateur = $nom;
+            $this->prenomUtilisateur = $prenom;
         }
     }
     
@@ -18,33 +22,55 @@ class ModelUtilisateur {
     }
     
     public function getLogin() {
-        return $this->login;
+        return $this->loginUtilisateur;
     }
     
     public function getMdp() {
-        return $this->mdp;
+        return $this->mdpUtilisateur;
+    }
+
+    public function getNom() {
+        return $this->nomUtilisateur;
+    }
+    
+    public function getPrenom() {
+        return $this->prenomUtilisateur;
     }
     
     public function setLogin($login){
-        $this->login = $login;
+        $this->loginUtilisateur = $login;
     }
     
     public function setMdp($mdp){
-        $this->login = $mdp;
+        $this->mdpUtilisateur = $mdp;
+    }
+
+    public function setNom($nom){
+        $this->nomUtilisateur = $nom;
+    }
+
+    public function setprenom($prenom){
+        $this->prenomUtilisateur = $prenom;
     }
       
     
     public static function connexion($login, $mdp){
         $data = array(':login'=>$login, ':mdp'=>$mdp);
-        $req = Model::$pdo->prepare("SELECT * FROM P_Utilisateurs WHERE login = :login AND mdp = :mdp ");
+        $req = Model::$pdo->prepare("SELECT * FROM P_Utilisateurs WHERE loginUtilisateur = :login AND mdpUtilisateur = :mdp ");
         $req->execute($data);
         if ($check = $req->rowcount() != 1) {
-            return "Erreur - Nombre d'utilisateur différent de 1";
+            return "";
         }
         else {
-            $req->setFetchMode(PDO::FETCH_CLASS, 'ModelVoiture');
+            $req->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
             $row = $req->fetch();
-            return $row;
+            session_start();
+            $_SESSION['id'] = $row->getIdUtilisateur();
+            $_SESSION['login'] = $row->getLogin();
+            $_SESSION['mdp'] = $row->getMdp();
+            $_SESSION['nom'] = $row->getNom();
+            $_SESSION['prenom'] = $row->getPrenom();
+            return "../index.php";
         }
     }
     
@@ -79,16 +105,16 @@ class ModelUtilisateur {
         $login = htmlspecialchars($this->login);
         $mdp = sha1($this->mdp);
         $data = array(':login'=>$login, ':mdp'=>$mdp);
-        $reqVerif = Model::$pdo->prepare("SELECT idUtilisateur FROM P_Utilisateurs WHERE login = :login");
+        $reqVerif = Model::$pdo->prepare("SELECT idUtilisateur FROM P_Utilisateurs WHERE loginUtilisateur = :login");
         $reqVerif->execute(array(':login'=>$login));
         $resVerif = $reqVerif->rowcount();
         if($resVerif > 0){
             return $erreur;
         }
         else {
-            $insert = Model::$pdo->prepare("INSERT INTO P_Utilisateurs(login, mdp) VALUES(:login,:mdp)");
+            $insert = Model::$pdo->prepare("INSERT INTO P_Utilisateurs(loginUtilisateur, mdpUtilisateur) VALUES(:login,:mdp)");
             $insert->execute($data);
-            $getId = Model::$pdo->prepare("SELECT idUtilisateur FROM P_Utilisateurs WHERE login = :login");
+            $getId = Model::$pdo->prepare("SELECT idUtilisateur FROM P_Utilisateurs WHERE loginUtilisateur = :login");
             $getId->execute(array(':login'=>$login));
             $arrayRetour = $getId->fetch();
             $idRetour = $arrayRetour[0];

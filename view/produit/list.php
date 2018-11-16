@@ -1,3 +1,9 @@
+<?php 
+session_start();
+echo $_SESSION['id'];
+?>
+
+
 <table id="liste_produits" border="0" cellspacing="0" cellpadding="0">
 	<tr class="infos">
 		<th  style="border: 0px 1px;" class="image"></th>
@@ -28,11 +34,19 @@
 				</td>
 				<td class="details">
 				<a href="#">Voir</a>
-				</td>
+				</td>';
+				if(isset($_SESSION['id'])){
+					echo '
 				<td class="achat">
 				<a href="#">Ajouter au Panier</a>
-				</td>
+				</td>';
+				}
+				echo '
 			</tr>';
 	} ?>
 
 </table>
+
+<div>
+	<a href="view/connexion.php">Yop</a>
+</div>
