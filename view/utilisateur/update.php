@@ -17,6 +17,10 @@
                   <label for="prenom_id">Prénom</label> 
                   <input type="text" placeholder="<?php echo $info->getPrenom(); ?>" name="prenom" id="prenom_id" value="<?php echo $info->getPrenom(); ?>"/>
                 </p>
+                  <p>
+                  <label for="prenom_id">Statut</label> 
+                  <input type="text" placeholder="<?php echo $info->getEstAdmin(); ?>" name="estAdmin" id="estAdmin_id" value="<?php echo $info->getEstAdmin(); ?>"/>
+                </p>
                 <p>
                   <input type="submit" value="Envoyer" />
                 </p>

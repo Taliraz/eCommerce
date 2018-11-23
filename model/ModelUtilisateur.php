@@ -7,6 +7,7 @@ class ModelUtilisateur {
     protected $mdpUtilisateur;
     protected $nomUtilisateur;
     protected $prenomUtilisateur;
+    protected $estAdmin;
     
     public function __construct($login = NULL, $mdp = NULL, $nom = NULL, $prenom = NULL){
         if(!is_null($login) && !is_null($mdp) && !is_null($nom) && !is_null($prenom)){
@@ -14,6 +15,7 @@ class ModelUtilisateur {
             $this->mdpUtilisateur = $mdp; 
             $this->nomUtilisateur = $nom;
             $this->prenomUtilisateur = $prenom;
+            $this->estAdmin = 0;
         }
     }
     
@@ -36,6 +38,10 @@ class ModelUtilisateur {
     public function getPrenom() {
         return $this->prenomUtilisateur;
     }
+
+    public function getEstAdmin(){
+        return $this->estAdmin;
+    }
     
     public function setLogin($login){
         $this->loginUtilisateur = $login;
@@ -53,13 +59,16 @@ class ModelUtilisateur {
         $this->prenomUtilisateur = $prenom;
     }
       
+    public function setEstAdmin($bool){
+        $this->estAdmin = $bool;
+    }
     
     public static function connexion($login, $mdp){
         $data = array(':login'=>$login, ':mdp'=>$mdp);
         $req = Model::$pdo->prepare("SELECT * FROM P_Utilisateurs WHERE loginUtilisateur = :login AND mdpUtilisateur = :mdp ");
         $req->execute($data);
         if ($check = $req->rowcount() != 1) {
-            return "";
+            return false;
         }
         else {
             $req->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
@@ -70,7 +79,8 @@ class ModelUtilisateur {
             $_SESSION['mdp'] = $row->getMdp();
             $_SESSION['nom'] = $row->getNom();
             $_SESSION['prenom'] = $row->getPrenom();
-            return "../index.php";
+            $_SESSION['estAdmin'] = $row->getEstAdmin();
+            return true;
         }
     }
     public static function getOne($idUtilisateur){
@@ -123,9 +133,9 @@ class ModelUtilisateur {
     }
 
     public static function update($id){
-        $data = array(":login"=>$_POST['login'], ":mdp"=>$_POST['mdp'], ":nom"=>$_POST['nom'], ":prenom"=>$_POST['prenom']);
+        $data = array(":login"=>$_POST['login'], ":mdp"=>$_POST['mdp'], ":nom"=>$_POST['nom'], ":prenom"=>$_POST['prenom'], ":estAdmin"=>$_POST['estAdmin']);
         $req = Model::$pdo->prepare("UPDATE P_Utilisateurs SET loginUtilisateur = :login, mdpUtilisateur = :mdp, nomUtilisateur = :nom,
-        prenomUtilisateur = :prenom WHERE idUtilisateur = $id");
+        prenomUtilisateur = :prenom, estAdmin = :estAdmin WHERE idUtilisateur = $id");
         $req->execute($data);
     }
 }

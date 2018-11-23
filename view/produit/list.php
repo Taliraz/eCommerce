@@ -1,6 +1,9 @@
 <?php 
-session_start();
-echo $_SESSION['id'];
+
+if(isset($_SESSION['id'])) {
+	echo $_SESSION['id'];
+}
+
 ?>
 
 
@@ -48,5 +51,5 @@ echo $_SESSION['id'];
 </table>
 
 <div>
-	<a href="view/connexion.php">Yop</a>
+	<a href="<?php echo File::build_path_css(array("view","connexion.php")); ?>">Connexion</a>
 </div>

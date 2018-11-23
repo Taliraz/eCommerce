@@ -9,5 +9,13 @@ if(isset($_GET['action'])) {
 else { 
 	$action="readAll"; 
 } 
-ControllerUtilisateur::$action();
+
+if(isset($_POST['secteur'])){
+	$secteur = $_POST['secteur'];
+}
+else {
+	$secteur="Produit";
+}
+
+('Controller'.$secteur.'')::$action();
 ?>
