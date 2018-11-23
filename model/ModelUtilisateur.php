@@ -1,5 +1,5 @@
 <?php 
-require(File::build_path(array("model","Model.php")));
+
 class ModelUtilisateur {
     
     protected $idUtilisateur;
@@ -73,8 +73,7 @@ class ModelUtilisateur {
             return "../index.php";
         }
     }
-    
-    public static function getUtilisateurAvecId($idUtilisateur){
+    public static function getOne($idUtilisateur){
         $req = Model::$pdo->prepare('SELECT * FROM P_Utilisateurs WHERE idUtilisateur = :idUtilisateur');
         $req->execute(array(':idUtilisateur'=>$idUtilisateur));
         $check = $req->rowcount();
@@ -86,25 +85,20 @@ class ModelUtilisateur {
         else { return "Erreur - Utilisateur non trouvé"; }
     }
     
-    public static function getAll($table, $typeId, $class){
-        $req = Model::$pdo->query ("SELECT * FROM $table JOIN P_Utilisateurs ON idUtilisateur = $typeId");
-        $req->setFetchMode(PDO::FETCH_CLASS, $class);
+    public static function getAll(){
+        $req = Model::$pdo->query ("SELECT * FROM P_Utilisateurs");
+        $req->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
         $row = $req->fetchAll();
         return $row;    
     }
     
-    public static function getOne($table, $id, $typeId, $class){
-        $req = Model::$pdo->query ("SELECT * FROM $table JOIN P_Utilisateurs ON idUtilisateur = $typeId WHERE $typeId = $id");
-        $req->setFetchMode(PDO::FETCH_CLASS, $class);
-        $row = $req->fetchAll();
-        return $row; 
-    }
-    
     public function saveUser(){
         $erreur = "utilisateur déjà présent dans la base de données";
-        $login = htmlspecialchars($this->login);
-        $mdp = sha1($this->mdp);
-        $data = array(':login'=>$login, ':mdp'=>$mdp);
+        $login = htmlspecialchars($this->loginUtilisateur);
+        $mdp = sha1($this->mdpUtilisateur);
+        $nom = htmlspecialchars($this->nomUtilisateur);
+        $prenom = htmlspecialchars($this->prenomUtilisateur);
+        $data = array(':login'=>$login, ':mdp'=>$mdp, ":nom"=>$nom, ":prenom"=>$prenom);
         $reqVerif = Model::$pdo->prepare("SELECT idUtilisateur FROM P_Utilisateurs WHERE loginUtilisateur = :login");
         $reqVerif->execute(array(':login'=>$login));
         $resVerif = $reqVerif->rowcount();
@@ -112,7 +106,7 @@ class ModelUtilisateur {
             return $erreur;
         }
         else {
-            $insert = Model::$pdo->prepare("INSERT INTO P_Utilisateurs(loginUtilisateur, mdpUtilisateur) VALUES(:login,:mdp)");
+            $insert = Model::$pdo->prepare("INSERT INTO P_Utilisateurs(loginUtilisateur, mdpUtilisateur, nomUtilisateur, prenomUtilisateur) VALUES(:login,:mdp, :nom, :prenom)");
             $insert->execute($data);
             $getId = Model::$pdo->prepare("SELECT idUtilisateur FROM P_Utilisateurs WHERE loginUtilisateur = :login");
             $getId->execute(array(':login'=>$login));
@@ -121,5 +115,17 @@ class ModelUtilisateur {
             
             return $idRetour;
         }
+    }
+
+    public function remove($id){
+        $req = Model::$pdo->prepare("DELETE * FROM P_Utilisateurs WHERE idUtilisateur = :id");
+        $req->execute(array(":id"->$id));
+    }
+
+    public static function update($id){
+        $data = array(":login"=>$_POST['login'], ":mdp"=>$_POST['mdp'], ":nom"=>$_POST['nom'], ":prenom"=>$_POST['prenom']);
+        $req = Model::$pdo->prepare("UPDATE P_Utilisateurs SET loginUtilisateur = :login, mdpUtilisateur = :mdp, nomUtilisateur = :nom,
+        prenomUtilisateur = :prenom WHERE idUtilisateur = $id");
+        $req->execute($data);
     }
 }
