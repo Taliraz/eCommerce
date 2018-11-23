@@ -9,7 +9,6 @@ require(File::build_path(array("model","Model.php")));
 	if(isset($_POST['login']) & isset($_POST['mdp'])) {
 	if(ModelUtilisateur::connexion($_POST['login'], $_POST['mdp'])) {
 		echo '../index.php';
-
 	}
 	else {	
 		$error = "Mot de passe ou Identifiant icorrect";

@@ -17,5 +17,6 @@ else {
 	$secteur="Produit";
 }
 
+
 ('Controller'.$secteur.'')::$action();
 ?>
