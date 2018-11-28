@@ -26,6 +26,50 @@ class Model{
   		}
 		
 	}
+
+	public static function selectAll(){
+		$table_name=static::$object;
+		$class_name='Model';
+	    $pdo=self::$pdo;
+	    $table='P_'.ucfirst($table_name).'s';
+	    $rep=$pdo->query("SELECT * FROM $table");
+	    $rep->setFetchMode(PDO::FETCH_CLASS, $class_name.ucfirst($table_name));
+	    $tab = $rep->fetchAll();
+	    return $tab;
+	}
+
+
+	public static function select($primary_value){
+		$table_name=static::$object;
+		$class_name='Model';
+		$primary_key=static::$primary;
+		$table='P_'.ucfirst($table_name).'s';
+		$sql = "SELECT * from $table WHERE $primary_key=:nom_tag";
+	    $req_prep = Model::$pdo->prepare($sql);
+
+	    $values = array(
+	        "nom_tag" => $primary_value,
+	    );   
+	    $req_prep->execute($values);
+	    $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name.ucfirst($table_name));
+	    $tab = $req_prep->fetchAll();
+	    if (empty($tab))
+	        return false;
+	    return $tab[0];
+	}
+
+	public static function delete($primary_value){
+		$table_name=static::$object;
+		$class_name='Model';
+		$primary_key=static::$primary;
+		$table='P_'.ucfirst($table_name).'s';
+	    $req_prep=Model::$pdo->prepare("DELETE FROM $table WHERE $primary_key=:tag");
+
+	    $values=array(
+	      "tag" => $primary_value,
+	      );
+	    $req_prep->execute($values);
+  }
 }
 Model::Init();
 

@@ -50,6 +50,3 @@ if(isset($_SESSION['id'])) {
 
 </table>
 
-<div>
-	<a href="<?php echo File::build_path_css(array("view","connexion.php")); ?>">Connexion</a>
-</div>

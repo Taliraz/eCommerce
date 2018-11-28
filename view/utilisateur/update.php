@@ -1,31 +1,28 @@
-<form style="margin-left:250px;" method="post" action="index.php?action=updated&idUtilisateur=<?php echo $info->getIdUtilisateur(); ?>">
-            <fieldset>
-                <legend>Modification Utilisateur </legend>
-                <p>
-                  <label for="login_id">Login</label> 
-                  <input type="text" placeholder="<?php echo $info->getLogin(); ?>" name="login" id="login_id" value="<?php echo $info->getLogin() ?>"/>
-                </p>
-                <p>
-                  <label for="mdp_id">Mot de Passe</label> 
-                  <input type="text" placeholder="<?php echo $info->getMdp(); ?>" name="mdp" id="mdp_id" value="<?php echo $info->getMdp(); ?>"/>
-                </p>
-                <p>
-                  <label for="nom_id">Nom</label> 
-                  <input type="text" placeholder="<?php echo $info->getNom(); ?>" name="nom" id="nom_id" value="<?php echo $info->getNom() ?>"/>
-                </p>
-                <p>
-                  <label for="prenom_id">Prénom</label> 
-                  <input type="text" placeholder="<?php echo $info->getPrenom(); ?>" name="prenom" id="prenom_id" value="<?php echo $info->getPrenom(); ?>"/>
-                </p>
-                  <p>
-                  <label for="prenom_id">Statut</label> 
-                  <input type="text" placeholder="<?php echo $info->getEstAdmin(); ?>" name="estAdmin" id="estAdmin_id" value="<?php echo $info->getEstAdmin(); ?>"/>
-                </p>
-                <p>
-                  <input type="submit" value="Envoyer" />
-                </p>
-                <p>
-                   <input id="bouton-retour" type="button" value="Retour" onclick="history.go(-1)">
-                </p>
-            </fieldset> 
-</form>
+<html> 
+    <body>
+      <form method="post" action="index.php?controller=utilisateur&action=updated&loginUtilisateur=<?php echo $v->getLoginUtilisateur(); ?>">
+        <fieldset>
+          <legend>Mon formulaire :</legend>
+          <p> 
+            <label for="loginUtilisateur_id">Login</label> :
+            <?php echo'<input readonly type="text" value="'.$v->getLoginUtilisateur().'" name="loginUtilisateur" id="loginUtilisateur_id" required/>'?>
+          </p>
+          <p>
+            <label for="nomUtilisateur_id">Nom</label> :
+            <?php echo '<input type="text" value="'.$v->getNomUtilisateur().'" name="nomUtilisateur" id="nomUtilisateur_id" required/>'?>
+          </p>
+          <p>
+            <label for="prenomUtilisateur_id">Prenom</label> :
+            <?php echo '<input type="text" value="'.$v->getPrenomUtilisateur().'" name="prenomUtilisateur" id="prenomUtilisateur_id" required/>'?>
+          </p>
+          <p> 
+            <label for="mdpUtilisateur_id">Mot de passe</label> :
+            <input type="password" name="mdpUtilisateur" id="mdpUtilisateur_id" required/>
+          <p>
+          <p>
+            <input type="submit" value="Envoyer" />
+          </p>
+        </fieldset> 
+      </form>
+    </body>
+</html>

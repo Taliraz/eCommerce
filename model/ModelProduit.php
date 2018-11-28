@@ -1,6 +1,6 @@
 <?php
-
-class ModelProduit{
+require_once File::build_path(array("model","Model.php"));
+class ModelProduit extends Model{
 	private $idProduit;
 	private $nomProduit;
 	private $prixProduit;
@@ -9,6 +9,8 @@ class ModelProduit{
 	private $couleurProduit;
 	private $paysProduit;
 	private $imageProduit;
+	protected static $object='produit';
+  	protected static $primary='idProduit';
 
 	public function __construct($n=NULL,$pr=NULL,$o=NULL,$po=NULL,$c=NULL,$pa=NULL,$i=NULL){
 		if (!is_null($n) && !is_null($pr) && !is_null($o) && !is_null($po) && !is_null($c) && !is_null($pa)){
@@ -80,30 +82,6 @@ class ModelProduit{
 
 	public function setImage($Pimage){
 		$this->imageProduit=$Pimage;
-	}
-
-	public static function getAllProduits(){
-		$pdo=Model::$pdo;
-		$rep=$pdo->query("SELECT * FROM P_Produits");
-		$rep->setFetchMode(PDO::FETCH_CLASS,'ModelProduit');
-		$tab_produit=$rep->fetchAll();
-		return $tab_produit;
-	}
-
-	public static function getProduitById($id) {
-	    $sql = "SELECT * from P_Produits WHERE idProduit=:idProduit";
-	    $req_prep = Model::$pdo->prepare($sql);
-
-	    $values = array(
-	        "idProduit" => $id,
-	    );  
-	    $req_prep->execute($values);
-	    $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
-	    $tab_produit = $req_prep->fetchAll();
-	    if (empty($tab_produit)){
-	        return false;
-	    }
-	    return $tab_produit[0];
 	}
 
 	public static function getProduitByNom($nom) {
@@ -226,14 +204,6 @@ class ModelProduit{
 
   }
 
-  public function delete(){
-    $req_prep=Model::$pdo->prepare("DELETE FROM P_Produits WHERE P_Produits.idProduit=:id");
-
-    $values=array(
-      "id" => $this->id,
-      );
-    $req_prep->execute($values);
-  }
 
 
 

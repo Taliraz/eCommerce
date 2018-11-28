@@ -1,10 +1,20 @@
-<div>
-    <h2 class="titre">Liste des Utilisateurs</h2>
-    <ul id="liste">
-    <?php 
-    foreach ($row as $valeur) {
-        echo '<p> <a href="index.php?action=details&idUtilisateur='.rawurlencode($valeur->getIdUtilisateur()).'"><li class="elements-liste"> ' . htmlspecialchars($valeur->getLogin()) . '</li></a></p>';
-    }?>
-    </ul>
-    <a class="bouton" href="index.php?action=create"> Ajouter un Utilisateur </a>
-</div>
+<!DOCTYPE html>
+<html>
+    <body>
+        <?php
+        foreach ($tab_v as $v){
+            echo '<p> login Utilisateur: <a title="Utilisateur" 
+                href="index.php?controller=utilisateur&action=read&loginutilisateur='
+                .rawurlencode($v->getLoginUtilisateur()).'">'. htmlspecialchars($v->getLoginUtilisateur()).'</a> 
+                <a title="supprimer" 
+                href="index.php?controller=utilisateur&action=delete&loginutilisateur='
+                .rawurlencode($v->getLoginUtilisateur()).'">supprimer</a> 
+                </p>';
+            }  
+
+        ?>
+        <p>
+            <a title="create" href="index.php?controller=utilisateur&action=create"> Ajouter une utilisateur </a>
+        </p>
+    </body>
+</html>

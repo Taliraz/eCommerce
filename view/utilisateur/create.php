@@ -1,27 +1,28 @@
-<form style="margin-left:250px" method="post" action="index.php?action=created">
-            <fieldset>
-                <legend>Nouvel Utilisateur :</legend>
-                <p>
-                  <label for="login_id">Login</label>  
-                  <input type="text" placeholder="Login" name="login" id="login_id" required/>
-                </p>
-                <p>
-                  <label for="mdp_id">Mot de Passe</label> 
-                  <input type="text" placeholder="Mot de Passe" name="mdp" id="mdp_id" required/>
-                </p>
-                <p>
-                  <label for="nom_id">Nom</label>
-                  <input type="text" placeholder="Nom" name="nom" id="nom_id" required/>
-                </p>
-                <p>
-                  <label for="prenom_id">Prénom</label> 
-                  <input type="text" placeholder="Prénom" name="prenom" id="prenom_id" required/>
-                </p>
-                <p>
-                    <input type="submit" value="Envoyer" />
-                </p>
-                <p>
-                   <input id="bouton-retour" type="button" value="Retour" onclick="history.go(-1)">
-                </p>
-            </fieldset> 
-</form>
+<html> 
+    <body>
+      <form method="post" action="index.php?controller=utilisateur&action=created">
+        <fieldset>
+          <legend>Mon formulaire :</legend>
+          <p>
+            <label for="loginUtilisateur_id">login</label> :
+            <input type="text" placeholder="Ex : 256AB34" name="loginUtilisateur" id="loginUtilisateur_id" required/>
+          </p>
+          <p>
+            <label for="nomUtilisateur_id">Nom</label> :
+            <input type="text" placeholder="Ex : bleu" name="nomUtilisateur" id="nomUtilisateur_id" required/>
+          </p>
+          <p>
+            <label for="prenomUtilisateur_id">Prenom</label> :
+            <input type="text" placeholder="Ex : Opel" name="prenomUtilisateur" id="prenomUtilisateur_id" required/>
+          </p>
+
+          <p> 
+            <label for="mdpUtilisateur_id">Mot de passe</label> :
+            <input type="password" name="mdpUtilisateur" id="mdpUtilisateur_id" required/>
+          <p>
+            <input type="submit" value="Envoyer" />
+          </p>
+        </fieldset> 
+      </form>
+    </body>
+</html>

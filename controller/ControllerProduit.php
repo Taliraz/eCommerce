@@ -1,10 +1,11 @@
 <?php
 require_once (File::build_path(array("model","ModelProduit.php")));
 class ControllerProduit {
+    protected static $object='produit';
 
 
 	public static function readAll() {
-        $tab_p = ModelProduit::getAllProduits();    
+        $tab_p = ModelProduit::selectAll();    
         $controller='produit';
         $view='list';
         $pagetitle='liste des Produits';
@@ -12,7 +13,7 @@ class ControllerProduit {
     }
 
     public static function read(){
-    	$p=ModelProduit::getProduitById($_GET ['id']);
+    	$p=ModelProduit::select($_GET ['id']);
     	if ($p==false){
             $controller='produit';
             $view='erreur';
@@ -56,8 +57,8 @@ class ControllerProduit {
 
     public static function delete(){
         $id=$_GET ['id'];
-        ModelProduit::deleteById($id);
-        $tab_p=ModelProduit::getAllProduits();
+        ModelProduit::delete($id);
+        $tab_p=ModelProduit::selectAll();
         $controller='produit';
         $view='deleted';
         $pagetitle='produit supprimé';
