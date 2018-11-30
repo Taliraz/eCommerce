@@ -69,7 +69,7 @@ class ControllerUtilisateur {
         session_unset();
         session_destroy();
         setcookie(session_name(),'',time()-1);
-        self::readAll();
+        ControllerProduit::readAll();
     }
 
 
