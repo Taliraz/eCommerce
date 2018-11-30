@@ -1,6 +1,7 @@
 <?php
 require (File::build_path(array("controller","ControllerProduit.php")));
 require (File::build_path(array("controller","ControllerUtilisateur.php")));
+require (File::build_path(array("controller","ControllerPanier.php")));
 
 if(isset($_GET['action'])) {
     $action = $_GET['action'];  
