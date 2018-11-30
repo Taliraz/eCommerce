@@ -28,5 +28,21 @@ class ControllerPanier{
 		$p=$produit;
 		require(File::build_path(array("view","view.php")));
 	}
+
+	public static function delete(){
+		$produit=ModelProduit::select($_GET['idProduit']);
+		if (isset($_COOKIE['Panier'])){
+			$tabcookie=unserialize($_COOKIE['Panier']);
+			unset($tabcookie[$produit->getId()]);
+			setcookie("Panier", serialize($tabcookie));
+			header("Location: index.php?action=readAll&controller=panier");
+		}
+	}
+
+	public static function deleteAll(){
+		$tabcookie=array();
+		setcookie("Panier", serialize($tabcookie));
+		ControllerProduit::readAll();
+	}
 }
 ?>
