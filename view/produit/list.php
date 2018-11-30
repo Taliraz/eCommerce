@@ -36,7 +36,7 @@ if(isset($_SESSION['id'])) {
 				'.htmlspecialchars($key->getPrix()).'
 				</td>
 				<td class="details">
-				<a href="#">Voir</a>
+				<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">Voir</a>
 				</td>';
 				if(isset($_SESSION['id'])){
 					echo '

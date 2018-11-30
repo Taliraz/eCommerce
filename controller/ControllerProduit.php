@@ -13,7 +13,7 @@ class ControllerProduit {
     }
 
     public static function read(){
-    	$p=ModelProduit::select($_GET ['id']);
+    	$p=ModelProduit::select($_GET ['idProduit']);
     	if ($p==false){
             $controller='produit';
             $view='erreur';

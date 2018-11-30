@@ -47,10 +47,15 @@ class ControllerUtilisateur {
 
 
     public static function create(){
-        $controller='utilisateur';
-        $view='create';
-        $pagetitle='Creation de utilisateur';
-        require(File::build_path(array("view","view.php")));
+        if (Session::is_admin()){
+            $controller='utilisateur';
+            $view='create';
+            $pagetitle='Creation de utilisateur';
+            require(File::build_path(array("view","view.php")));
+        }
+        else {
+            Self::readAll();
+        }
     }
 
     public static function connect(){
@@ -69,12 +74,17 @@ class ControllerUtilisateur {
 
 
     public static function created(){
-      $ModelUtilisateur=new ModelUtilisateur($_POST['loginUtilisateur'],$_POST['nomUtilisateur'],$_POST['prenomUtilisateur'],Security::chiffrer($_POST['mdpUtilisateur']),false);
-      $ModelUtilisateur->save();
-      $controller='utilisateur';
-      $view='created';
-      $pagetitle='Utilisateur créé';
-      require(File::build_path(array("view","view.php")));
+        if (Session::is_admin()){ 
+              $ModelUtilisateur=new ModelUtilisateur($_POST['loginUtilisateur'],$_POST['nomUtilisateur'],$_POST['prenomUtilisateur'],Security::chiffrer($_POST['mdpUtilisateur']),false);
+              $ModelUtilisateur->save();
+              $controller='utilisateur';
+              $view='created';
+              $pagetitle='Utilisateur créé';
+              require(File::build_path(array("view","view.php")));
+        }
+        else{
+            Self::readAll();
+        }
     }
     
     public static function update(){
@@ -113,10 +123,7 @@ class ControllerUtilisateur {
             $_SESSION['loginUtilisateur']=$_POST['loginUtilisateur'];
             $v=ModelUtilisateur::select($_POST['loginUtilisateur']);
             $_SESSION['estAdmin']=$v->getEstAdmin();
-            $controller='utilisateur';
-            $view='detail';
-            $pagetitle='Connecté';
-            require(File::build_path(array("view","view.php")));
+            ControllerProduit::readAll();
         }
         else{
             echo '<p>Mot de passe erroné</p>';
