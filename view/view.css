@@ -56,6 +56,12 @@ body {
 
 
 
+
+
+
+
+
+
 #menu {
 	margin: 0;
 	background-image: linear-gradient(to right, #427acd, #8159b2, #a23081, #a70044, #900000);
@@ -66,10 +72,12 @@ body {
 	left: 0;
 	list-style: none;
 	width: 100%;
+	height: 68px;
 }
 
-#menu > a {
+#menu a {
 	text-decoration: none;
+	color: white;
 }
 
 .menu_button {
@@ -83,7 +91,7 @@ body {
 }
 
 .menu_button:hover {
-	background-color: rgba(236, 222, 219,0.5);
+	background-color: rgba(236, 222, 219, 0.5);
 	color: black;
 }
 
@@ -94,6 +102,25 @@ body {
 }
 
 
+.sub_menu {
+	display:none;
+	margin: 0px;
+	padding: 10px;
+}
+
+.sub_menu a {
+	list-style: none;
+	text-decoration: none;
+}
+
+.sub_menu  li {
+	margin-top: 5px;
+	color: black;
+}
+
+.menu_button:hover > .sub_menu {
+	display: block;
+}
 
 
 
