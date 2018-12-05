@@ -20,7 +20,6 @@
                     echo '<a href="index.php?controller=Utilisateur&action=disconnect"><li class="menu_button" id="menu_button_from_right">Deconnexion</li></a>';
                 } 
                 else if (isset($_SESSION['loginUtilisateur']) && Session::is_user($_SESSION['loginUtilisateur'])) {
-                    echo '<a href="index.php?controller=panier&action=readAll"><li class="menu_button">Mon Panier</li></a>';
                     echo '<a href="index.php?controller=Utilisateur&action=disconnect"><li class="menu_button" id="menu_button_from_right">Deconnexion</li></a>';
                 }
                 else {

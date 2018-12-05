@@ -38,9 +38,6 @@
 						'.htmlspecialchars($key->getPrix()).'
 					</a>
 				</td>
-				<td class="add_panier">
-					<a href="index.php?controller=panier&action=add&idProduit='.$key->getId().'">Ajouter au Panier</a>
-				</td>
 				'; if(Session::is_admin()) { echo '<td><a href="index.php?controller=produit&action=delete">Supprimer</a></td>'; }
 				echo '
 			</tr>

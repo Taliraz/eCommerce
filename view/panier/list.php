@@ -28,11 +28,16 @@
 				<td class="couleur">
 					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
 						'.htmlspecialchars($key->getCouleur()).'
-					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
+					</a>
 				</td>
 				<td class="prix">
 					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
 						'.htmlspecialchars($key->getPrix()).'
+					</a>
+				</td>
+				<td class="quantite">
+					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
+						'.htmlspecialchars($key->getCouleur()).'
 					</a>
 				</td>
 				<td class="delete_panier">
