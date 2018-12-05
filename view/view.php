@@ -8,24 +8,23 @@
     <body>
         <header>
             <ul id="menu">
-                <a href="index.php"><li class="menu_button">Accueil</li></a>
                 <a href="index.php?controller=Produit&action=readAll">
-                    <li class="menu_button"><span>Produits</span>
-                        <ul class="sub_menu">    
-                            <a href="#"><li>Liste</li></a>
-                            <a href="#"><li>Autre chose</li></a>
-                            <a href="#"><li>Paul l'a dit</li></a>
-                        </ul>
+                    <li class="menu_button">
+                        <span>Produits</span>
                     </li>
                 </a>
+                <a href="index.php?controller=panier&action=readAll"><li class="menu_button">Mon Panier</li></a>
                 <?php if(Session::is_admin()) {
-                    echo '<li class="menu_button">Modération</li>';
+                    echo '<a href="index.php?controller=Utilisateur&action=readAll"><li class="menu_button">Modération</li></a>';
+                    echo '<a href="index.php?controller=panier&action=readAll"><li class="menu_button">Mon Panier</li></a>';
+                    echo '<a href="index.php?controller=Utilisateur&action=disconnect"><li class="menu_button" id="menu_button_from_right">Deconnexion</li></a>';
                 } 
                 else if (isset($_SESSION['loginUtilisateur']) && Session::is_user($_SESSION['loginUtilisateur'])) {
-                    echo '<li class="menu_button">Mon Panier</li>';
+                    echo '<a href="index.php?controller=panier&action=readAll"><li class="menu_button">Mon Panier</li></a>';
+                    echo '<a href="index.php?controller=Utilisateur&action=disconnect"><li class="menu_button" id="menu_button_from_right">Deconnexion</li></a>';
                 }
                 else {
-                    echo '<a href="index.php?controller=Utilisateur&action=connect"><li class="menu_button" id="menu_button_connect">Connexion</li></a>';
+                    echo '<a href="index.php?controller=Utilisateur&action=connect"><li class="menu_button" id="menu_button_from_right">Connexion</li></a>';
                 }
 
                 ?>

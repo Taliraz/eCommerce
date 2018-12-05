@@ -5,32 +5,41 @@
 		<th  style="border: 0px 1px;" class="poids">Poids</th>
 		<th  style="border: 0px 1px;" class="couleur">Couleur</th>
 		<th class="prix">Prix</th>
-		<th></th>
-		<th></th>
+		<th class="vider"><a href="index.php?controller=panier&action=deleteAll">Vider le panier</a></th>
 	</tr>
 	<?php foreach($tabcookie as $key){
 		echo '
-		<tr class="elements">
+			<tr class="elements">
 				<td class="image">
-				<img src="'.$key->getImage().'"alt="'.$key->getId().'" class="image_param">
+					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
+						<img src="'.$key->getImage().'"alt="'.$key->getId().'" class="image_param">
+					</a>
 				</td>
 				<td style="border: 0px 1px;" class="produit">
-				'.$key->getNom().'
+					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
+						'.$key->getNom().'
+					</a>
 				</td>
 				<td class="poids">
-				'.htmlspecialchars($key->getPoid()).'
+					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
+						'.htmlspecialchars($key->getPoid()).'
+					</a>
 				</td>
 				<td class="couleur">
-				'.htmlspecialchars($key->getCouleur()).'
+					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
+						'.htmlspecialchars($key->getCouleur()).'
+					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
 				</td>
 				<td class="prix">
-				'.htmlspecialchars($key->getPrix()).'
+					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
+						'.htmlspecialchars($key->getPrix()).'
+					</a>
 				</td>
-				<td class="details">
-				<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">Voir</a>
-				</td>';
-				echo '
+				<td class="delete_panier">
+				<a href="index.php?controller=panier&action=delete&idProduit='.$key->getId().'">Supprimer du panier</a>
+				</td>
 			</tr>';
+
 	} ?>
 
 </table>

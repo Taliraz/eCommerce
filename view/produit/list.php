@@ -1,11 +1,3 @@
-<?php 
-
-if(isset($_SESSION['id'])) {
-	echo $_SESSION['id'];
-}
-
-?>
-
 
 <table id="liste_produits" border="0" cellspacing="0" cellpadding="0">
 	<tr class="infos">
@@ -14,38 +6,45 @@ if(isset($_SESSION['id'])) {
 		<th  style="border: 0px 1px;" class="poids">Poids</th>
 		<th  style="border: 0px 1px;" class="couleur">Couleur</th>
 		<th class="prix">Prix</th>
-		<th></th>
+		<?php if(Session::is_admin()) { echo '<th class="ajout_produit"><a href="index.php?controller=Produit&action=create">Ajouter</a></th>'; } ?>
 		<th></th>
 	</tr>
 	<?php foreach($tab_p as $key){
 		echo '
-		<tr class="elements">
+		<a href="#">
+			<tr class="elements">
 				<td class="image">
-				<img src="'.$key->getImage().'"alt="'.$key->getId().'" class="image_param">
+					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
+						<img src="'.$key->getImage().'"alt="'.$key->getId().'" class="image_param">
+					</a>
 				</td>
 				<td style="border: 0px 1px;" class="produit">
-				'.$key->getNom().'
+					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
+						'.$key->getNom().'
+					</a>
 				</td>
 				<td class="poids">
-				'.htmlspecialchars($key->getPoid()).'
+					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
+						'.htmlspecialchars($key->getPoid()).'
+					</a>
 				</td>
 				<td class="couleur">
-				'.htmlspecialchars($key->getCouleur()).'
+					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
+						'.htmlspecialchars($key->getCouleur()).'
+					</a>
 				</td>
 				<td class="prix">
-				'.htmlspecialchars($key->getPrix()).'
+					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
+						'.htmlspecialchars($key->getPrix()).'
+					</a>
 				</td>
-				<td class="details">
-				<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">Voir</a>
-				</td>';
-				if(isset($_SESSION['id'])){
-					echo '
-				<td class="achat">
-				<a href="#">Ajouter au Panier</a>
-				</td>';
-				}
+				<td class="add_panier">
+					<a href="index.php?controller=panier&action=add&idProduit='.$key->getId().'">Ajouter au Panier</a>
+				</td>
+				'; if(Session::is_admin()) { echo '<td><a href="index.php?controller=produit&action=delete">Supprimer</a></td>'; }
 				echo '
-			</tr>';
+			</tr>
+		</a>';
 	} ?>
 
 </table>
