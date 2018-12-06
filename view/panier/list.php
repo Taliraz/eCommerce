@@ -7,7 +7,11 @@
 		<th class="prix">Prix</th>
 		<th class="vider"><a href="index.php?controller=panier&action=deleteAll">Vider le panier</a></th>
 	</tr>
-	<?php foreach($tabcookie as $key){
+	<?php 
+	$total=0;
+	foreach($tabcookie as $key){
+		$total=$total+$key->getPrix();
+
 		echo '
 			<tr class="elements">
 				<td class="image">
@@ -48,3 +52,4 @@
 	} ?>
 
 </table>
+<h1 class='total'>Total :<?php echo $total; ?> </h1>
