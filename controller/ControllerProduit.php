@@ -56,13 +56,45 @@ class ControllerProduit {
     }
 
     public static function delete(){
-        $id=$_GET ['id'];
+        $id=$_GET['idproduit'];
         ModelProduit::delete($id);
         $tab_p=ModelProduit::selectAll();
         $controller='produit';
         $view='deleted';
         $pagetitle='produit supprimé';
         require(File::build_path(array("view","view.php")));
+    }
+
+    public static function update(){
+        $idproduit=$_GET ['idproduit'];
+        $v=ModelProduit::select($idproduit);
+        $controller='produit';
+        $view='update';
+        $pagetitle='modification de produit';
+        require(File::build_path(array("view","view.php")));
+    }
+
+    public static function updated(){
+        if (!empty($_FILES['fichier']) && is_uploaded_file($_FILES['fichier']['tmp_name'])) {
+            $name = $_FILES['fichier']['name'];
+            $pic_path = File::build_path(array("img","$name"));
+            if (!move_uploaded_file($_FILES['fichier']['tmp_name'], $pic_path)) {
+              echo "La copie a échoué";
+            }
+            $imageProduit="http://webinfo.iutmontp.univ-montp2.fr/~armangaus/eCommerce/img/".$name;
+        }
+        else{
+            $test=ModelProduit::select($_GET['idproduit']);
+            $imageProduit=$test->getImage();
+        }
+        $idproduit=$_GET['idproduit'];
+        $ModelProduit=new ModelProduit($_POST['nomProduit'],$_POST['prixProduit'],$_POST['origineProduit'],$_POST ['poidProduit'],$_POST ['couleurProduit'],$_POST['paysProduit'], $imageProduit);
+        $ModelProduit->update(ModelProduit::select($idproduit));
+        $controller='produit';
+        $view='updated';
+        $pagetitle='Produit modifiée';
+        require(File::build_path(array("view","view.php")));
+
     }
 
 

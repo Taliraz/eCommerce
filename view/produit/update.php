@@ -1,47 +1,44 @@
 <!DOCTYPE html>
 <html>
     <body>
-       <form method="post" action="index.php?action=created" enctype="multipart/form-data">
+       <form method="post" action="index.php?controller=produit&action=updated&idproduit=<?php echo $v->getId(); ?>"
         <fieldset>
           <legend><h2>Formulaire :</h2></legend>
           <p>
             <label for="nomProd_id">Nom du Produit</label> :
-            <input type="text" placeholder="" name="nomProduit" id="nomProd_id" required/>
+            <?php echo '<input type="text" value="'.$v->getNom().'" name="nomProduit" id="nomProd_id" required/>'; ?>
             <br>
             <br>
 
             <label for="prixProd_id">Prix du Produit</label> :
-            <input type="text" placeholder="" name="prixProduit" id="prixProd_id" required/>
+            <?php echo '<input type="text" value="'.$v->getPrix().'" name="prixProduit" id="prixProd_id" required/>';?>
             <br>
             <br>
 
             <label for="originProd_id">Origine du Produit</label> :
             <select name="origineProduit" id="originProd_id" required/>
-              <option>Mer</option>
-              <option>Volcan</option>
-              <option>Montagne</option>
-              <option>Eau douce</option>
+              <?php echo '<option value="'.$v->getOrigine().'" selected>'.$v->getOrigine().'</option>';?>
+              <option value="Mer">Mer</option>
+              <option value="Volcan">Volcan</option>
+              <option value="Montagne">Montagne</option>
+              <option value="Eau douce">Eau douce</option>
             </select>
             <br>
             <br>
 
             <label for="poidProd_id">Poid du Produit</label> :
-            <input type="number" placeholder="" name="poidProduit" id="poidProd_id" required/>
-            <select name="unite">
-              <option value="1000" >Kg</option>
-              <option value="1" >g</option>
-            </select>
+            <?php echo '<input type="number" value="'.$v->getPoid().'" name="poidProduit" id="poidProd_id" required/>';?>
             <br>
             <br>
 
             <label for="coulProd_id">Couleur du Produit</label> :
-            <input type="text" placeholder="" name="couleurProduit" id="coulProd_id" required/>
+            <?php echo '<input type="text" value="'.$v->getCouleur().'" name="couleurProduit" id="coulProd_id" required/>'; ?>
             <br>
             <br>
 
             <label for="paysProd_id">Pays du Produit</label> :
             <select name="paysProduit">
-              
+              <?php echo '<option value="'.$v->getPays().'" selected>'.$v->getPays().'</option>';?>
               <option value="Afghanistan">Afghanistan </option>
               <option value="Afrique_Centrale">Afrique Centrale </option>
               <option value="Afrique_du_sud">Afrique du Sud </option>
@@ -299,7 +296,7 @@
               <br>
               <br>
               <label for="imgProd_id">Image du Produit</label> :
-              <input type="file" name="fichier"  required/>
+              <input type="file" name="fichier"  />
           </p>
           <p>
               <input type="submit" value="Envoyer" />
