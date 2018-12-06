@@ -7,6 +7,10 @@
             <label for="loginUtilisateur_id">Login</label> :
             <?php echo'<input readonly type="text" value="'.$v->getLoginUtilisateur().'" name="loginUtilisateur" id="loginUtilisateur_id" required/>'?>
           </p>
+           <p> 
+            <label for="mailUtilisateur_id">Mail</label> :
+            <?php echo'<input readonly type="text" value="'.$v->getMailUtilisateur().'" name="mailUtilisateur" id="mailUtilisateur_id" required/>'?>
+          </p>
           <p>
             <label for="nomUtilisateur_id">Nom</label> :
             <?php echo '<input type="text" value="'.$v->getNomUtilisateur().'" name="nomUtilisateur" id="nomUtilisateur_id" required/>'?>

@@ -75,7 +75,7 @@ class ControllerUtilisateur {
 
     public static function created(){
         if (Session::is_admin()){ 
-              $ModelUtilisateur=new ModelUtilisateur($_POST['loginUtilisateur'],$_POST['nomUtilisateur'],$_POST['prenomUtilisateur'],Security::chiffrer($_POST['mdpUtilisateur']),false);
+              $ModelUtilisateur=new ModelUtilisateur($_POST['loginUtilisateur'],$_POST['nomUtilisateur'],$_POST['prenomUtilisateur'],Security::chiffrer($_POST['mdpUtilisateur']),false,$_POST['mailUtilisateur']);
               $ModelUtilisateur->save();
               $controller='utilisateur';
               $view='created';
@@ -104,7 +104,7 @@ class ControllerUtilisateur {
     public static function updated(){
         $loginUtilisateur=$_GET['loginUtilisateur'];
         if (Session::is_user($loginUtilisateur) || Session::is_admin($loginUtilisateur)){
-            $ModelUtilisateur=new ModelUtilisateur($_POST['loginUtilisateur'],$_POST['nomUtilisateur'],$_POST['prenomUtilisateur'],Security::chiffrer($_POST['mdpUtilisateur']),false);
+            $ModelUtilisateur=new ModelUtilisateur($_POST['loginUtilisateur'],$_POST['nomUtilisateur'],$_POST['prenomUtilisateur'],Security::chiffrer($_POST['mdpUtilisateur']),false,$_POST['mailUtilisateur']);
             $ModelUtilisateur->update(ModelUtilisateur::select($loginUtilisateur));
             $controller='utilisateur';
             $view='updated';
