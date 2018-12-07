@@ -23,6 +23,7 @@
                 }
                 else {
                     echo '<a href="index.php?controller=Utilisateur&action=connect"><li class="menu_button" id="menu_button_from_right">Connexion</li></a>';
+                    echo '<a href="index.php?controller=Utilisateur&action=create"><li class="menu_button" id="menu_button_from_right2">Inscription</li></a>';
                 }
 
                 ?>

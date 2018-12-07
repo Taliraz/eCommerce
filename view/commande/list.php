@@ -17,12 +17,12 @@
 				</td>
 				<td class="poids">
 					<a href="index.php?controller=commande&action=read&idProduit='.$key->getId().'">
-						'.htmlspecialchars($key->getPoid()).'
+						'.htmlspecialchars($key->getLoginUtilisateur()).'
 					</a>
 				</td>
 				<td class="couleur">
 					<a href="index.php?controller=commande&action=read&idProduit='.$key->getId().'">
-						'.htmlspecialchars($key->getCouleur()).'
+						'.htmlspecialchars($key->getTabProduit()).'
 					</a>
 				</td>
 				<td class="prix">
@@ -38,4 +38,5 @@
 	} ?>
 
 </table>
+
 <h1 class='total'>Total : <?php echo "$total"; ?>€ </h1>

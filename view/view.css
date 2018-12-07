@@ -122,7 +122,14 @@ body {
 
 #menu_button_from_right {
 	position: fixed;
-	right:5vw;
+	right:8.4vw;
+	margin:auto;
+}
+
+#menu_button_from_right2 {
+	position: fixed;
+	right:0vw;
+	margin:auto;
 }
 
 
