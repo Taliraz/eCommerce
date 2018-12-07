@@ -52,4 +52,4 @@
 	} ?>
 
 </table>
-<h1 class='total'>Total :<?php echo $total; ?> </h1>
+<h1 class='total'>Total : <?php echo "$total"; ?>€ </h1>
