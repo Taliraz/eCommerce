@@ -19,9 +19,11 @@ class ControllerPanier{
 		$produit=ModelProduit::select($_GET['idProduit']);
 		if (isset($_COOKIE['Panier'])){
 			$tabcookie=unserialize($_COOKIE['Panier']);
+			var_dump($tabcookie);
+			$tabcookie[$_GET['idProduit']][1]=$tabcookie[$_GET['idProduit']][1]+1;
 		}
-		$tabcookie[$produit->getId()]=$produit;
-		setcookie("Panier", serialize($tabcookie));
+		$tabcookie[$produit->getId()]=array($produit,1);
+		setcookie("Panier", serialize($tabcookie),time()+3600);
 		$controller='produit';
 		$view='detail';
 		$pagetitle='ajouté au panier';

@@ -11,35 +11,41 @@
 	<?php 
 	$total=0;
 	foreach($tabcookie as $key){
+		$idKey=$key[0]->getId();
 		if(isset($_POST["quantite"])){
-							$qte=$_POST["quantite"];
-						}
-						else $qte=1;
+			var_dump($tabcookie[$idKey]);
+			$tabcookie[$idKey][1]=$_POST["quantite"];
+			$qte=$_POST["quantite"];
+			setcookie("Panier", serialize($tabcookie));
+		}
+		else $qte=$key[1];
+		$total=$total+$key[0]->getPrix()*$qte;
+
 		echo '
 			<tr class="elements">
 				<td class="image">
-					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
-						<img src="'.$key->getImage().'"alt="'.$key->getId().'" class="image_param">
+					<a href="index.php?controller=produit&action=read&idProduit='.$idKey.'">
+						<img src="'.$key[0]->getImage().'"alt="'.$idKey.'" class="image_param">
 					</a>
 				</td>
 				<td style="border: 0px 1px;" class="produit">
-					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
-						'.$key->getNom().'
+					<a href="index.php?controller=produit&action=read&idProduit='.$idKey.'">
+						'.$key[0]->getNom().'
 					</a>
 				</td>
 				<td class="poids">
-					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
-						'.htmlspecialchars($key->getPoid()).'
+					<a href="index.php?controller=produit&action=read&idProduit='.$idKey.'">
+						'.htmlspecialchars($key[0]->getPoid()).'
 					</a>
 				</td>
 				<td class="couleur">
-					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
-						'.htmlspecialchars($key->getCouleur()).'
+					<a href="index.php?controller=produit&action=read&idProduit='.$idKey.'">
+						'.htmlspecialchars($key[0]->getCouleur()).'
 					</a>
 				</td>
 				<td class="prix">
-					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
-						'.htmlspecialchars($key->getPrix()).'
+					<a href="index.php?controller=produit&action=read&idProduit='.$idKey.'">
+						'.htmlspecialchars($key[0]->getPrix()).'
 					</a>
 				</td>
 				<td class="quantite">
@@ -50,16 +56,12 @@
 					
 				</td>
 				<td class="delete_panier">
-				<a href="index.php?controller=panier&action=delete&idProduit='.$key->getId().'">Supprimer du panier</a>
+				<a href="index.php?controller=panier&action=delete&idProduit='.$idKey.'">Supprimer du panier</a>
 				</td>
 			</tr>';
-			if(isset($_POST["quantite"])){
-				$total=$total+$key->getPrix()*$qte;
-			}
-			else $total=$total+$key->getPrix();
-			
+	}
 
-	} ?>
+	 ?>
 
 </table>
 <h1 class='total'>Total : <?php echo "$total"; ?>€ </h1>
