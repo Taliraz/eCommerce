@@ -60,6 +60,7 @@
 				</td>
 			</tr>';
 	}
+	setcookie("Total",serialize($total),time()+3600);
 
 	 ?>
 

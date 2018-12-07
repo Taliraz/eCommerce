@@ -16,10 +16,10 @@ class ControllerPanier{
 
 
 	public static function add(){
+		echo 'Produit ajouté au panier';
 		$produit=ModelProduit::select($_GET['idProduit']);
 		if (isset($_COOKIE['Panier'])){
 			$tabcookie=unserialize($_COOKIE['Panier']);
-			$tabcookie[$_GET['idProduit']][1]=$tabcookie[$_GET['idProduit']][1]+1;
 		}
 		$tabcookie[$produit->getId()]=array($produit,1);
 		setcookie("Panier", serialize($tabcookie),time()+3600);
