@@ -12,4 +12,11 @@ class Security{
 	static public function getSeed() {
    		return self::$seed;
 	}
+
+	public static function generateRandomHex() {
+	  $numbytes = 16;
+	  $bytes = openssl_random_pseudo_bytes($numbytes); 
+	  $hex   = bin2hex($bytes);
+	  return $hex;
+	}
 }

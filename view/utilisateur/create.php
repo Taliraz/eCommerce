@@ -8,6 +8,11 @@
             <input type="text" placeholder="Ex : 256AB34" name="loginUtilisateur" id="loginUtilisateur_id" required/>
           </p>
           <p>
+            <label for="mailUtilisateur_id">Email:</label>
+            <input type="email" id="mailUtilisateur_id" name="mailUtilisateur" required>
+          </p>
+
+          <p>
             <label for="nomUtilisateur_id">Nom</label> :
             <input type="text" placeholder="Ex : bleu" name="nomUtilisateur" id="nomUtilisateur_id" required/>
           </p>

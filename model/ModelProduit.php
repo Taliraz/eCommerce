@@ -14,13 +14,13 @@ class ModelProduit extends Model{
 
 	public function __construct($n=NULL,$pr=NULL,$o=NULL,$po=NULL,$c=NULL,$pa=NULL,$i=NULL){
 		if (!is_null($n) && !is_null($pr) && !is_null($o) && !is_null($po) && !is_null($c) && !is_null($pa)){
-			$this->nom=$n;
-			$this->prix=$pr;
-			$this->origine=$o;
-			$this->poid=$po;
-			$this->couleur=$c;
-			$this->pays=$pa;
-			$this->image=$i;
+			$this->nomProduit=$n;
+			$this->prixProduit=$pr;
+			$this->origineProduit=$o;
+			$this->poidProduit=$po;
+			$this->couleurProduit=$c;
+			$this->paysProduit=$pa;
+			$this->imageProduit=$i;
 		}
 	}
 
@@ -185,13 +185,13 @@ class ModelProduit extends Model{
       $req_prep=Model::$pdo->prepare("INSERT INTO P_Produits(nomProduit,prixProduit,origineProduit,poidProduit,couleurProduit,paysProduit,imageProduit)VALUES(:nomProduit,:prixProduit,:origineProduit,:poidProduit,:couleurProduit,:paysProduit,:imageProduit)");
 
       $values=array(
-        "nomProduit" => $this->nom,
-        "prixProduit" => $this->prix,
-        "origineProduit" => $this->origine,
-        "poidProduit" => $this->poid,
-        "couleurProduit" => $this->couleur,
-        "paysProduit" => $this->pays,
-        "imageProduit" => $this->image,
+        "nomProduit" => $this->nomProduit,
+        "prixProduit" => $this->prixProduit,
+        "origineProduit" => $this->origineProduit,
+        "poidProduit" => $this->poidProduit,
+        "couleurProduit" => $this->couleurProduit,
+        "paysProduit" => $this->paysProduit,
+        "imageProduit" => $this->imageProduit,
         );
       $req_prep->execute($values);
     }
@@ -201,6 +201,23 @@ class ModelProduit extends Model{
         return false;
       }
     }
+
+  }
+
+    public function update($data){
+    $req_prep=Model::$pdo->prepare("UPDATE P_Produits SET nomProduit=:nomProduit, prixProduit = :prixProduit, origineProduit=:origineProduit, poidProduit=:poidProduit, couleurProduit=:couleurProduit, paysProduit=:paysProduit, imageProduit=:imageProduit WHERE idProduit=:idProduit");
+
+ 	$values=array(
+ 		"idProduit" => $_GET['idproduit'],
+        "nomProduit" => $this->nomProduit,
+        "prixProduit" => $this->prixProduit,
+        "origineProduit" => $this->origineProduit,
+        "poidProduit" => $this->poidProduit,
+        "couleurProduit" => $this->couleurProduit,
+        "paysProduit" => $this->paysProduit,
+        "imageProduit" => $this->imageProduit,
+    );
+    $req_prep->execute($values);
 
   }
 

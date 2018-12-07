@@ -38,7 +38,7 @@
 						'.htmlspecialchars($key->getPrix()).'
 					</a>
 				</td>
-				'; if(Session::is_admin()) { echo '<td><a href="index.php?controller=produit&action=delete">Supprimer</a></td>'; }
+				'; if(Session::is_admin()) { echo '<td><a href="index.php?controller=produit&action=delete&idproduit='.$key->getId().'">Supprimer</a></td>'; }
 				echo '
 			</tr>
 		</a>';

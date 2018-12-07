@@ -7,6 +7,8 @@ class ModelUtilisateur extends Model{
   private $prenomUtilisateur;
   private $mdpUtilisateur;
   private $estAdmin;
+  private $mailUtilisateur;
+  private $nonce;
   protected static $object='utilisateur';
   protected static $primary='loginUtilisateur';
 
@@ -55,28 +57,48 @@ class ModelUtilisateur extends Model{
   public function setestAdmin($estAdmin2){
     $this->estAdmin=$estAdmin2;
   }
+
+  public function getMailUtilisateur(){
+    return $this->mailUtilisateur;
+  }
+
+  public function setMailUtilisateur($mailUtilisateur2){
+    $this->mailUtilisateur=$mailUtilisateur2;
+  }
+
+  public function getNonce(){
+    return $this->nonce;
+  }
+
+  public function setNonce($nonce){
+    $this->nonce=$nonce;
+  }
       
   // un constructeur
-  public function __construct($l=NULL, $n=NULL, $p=NULL,$m=NULL,$a=NULL)  {
-    if (!is_null($l) && !is_null($n) && !is_null($p) && !is_null($m) && !is_null($a)) {
+  public function __construct($l=NULL, $n=NULL, $p=NULL,$m=NULL,$a=NULL,$ma=NULL,$no=NULL)  {
+    if (!is_null($l) && !is_null($n) && !is_null($p) && !is_null($m) && !is_null($a) && !is_null($ma)) {
       $this->loginUtilisateur = $l;
       $this->nomUtilisateur = $n;
       $this->prenomUtilisateur = $p;
       $this->mdpUtilisateur = $m;
       $this->estAdmin = $a;
+      $this->mailUtilisateur=$ma;
+      $this->nonce=$no;
     }
   } 
 
    public function save(){
     try{
-      $req_prep=Model::$pdo->prepare("INSERT INTO P_Utilisateurs(loginUtilisateur,nomUtilisateur,prenomUtilisateur,mdpUtilisateur,estAdmin)VALUES(:loginUtilisateur,:nomUtilisateur,:prenomUtilisateur,:mdpUtilisateur,:estAdmin)");
+      $req_prep=Model::$pdo->prepare("INSERT INTO P_Utilisateurs(loginUtilisateur,nomUtilisateur,prenomUtilisateur,mdpUtilisateur,estAdmin,mailUtilisateur,nonce)VALUES(:loginUtilisateur,:nomUtilisateur,:prenomUtilisateur,:mdpUtilisateur,:estAdmin, :mailUtilisateur,:nonce)");
 
       $values=array(
         "loginUtilisateur" => $this->loginUtilisateur,
         "nomUtilisateur" => $this->nomUtilisateur,
         "prenomUtilisateur" => $this->prenomUtilisateur,
         "mdpUtilisateur" => $this->mdpUtilisateur,
-        "estAdmin" => $this->estAdmin
+        "estAdmin" => $this->estAdmin,
+        "mailUtilisateur" => $this->mailUtilisateur,
+        "nonce" => $this->nonce
         );
       $req_prep->execute($values);
     }
@@ -101,15 +123,15 @@ class ModelUtilisateur extends Model{
   
 
   public function update($data){
-    $req_prep=Model::$pdo->prepare("UPDATE P_Utilisateurs SET loginUtilisateur=:loginUtilisateur, nomUtilisateur = :nomUtilisateur, prenomUtilisateur=:prenomUtilisateur, mdpUtilisateur=:mdpUtilisateur,estAdmin=:estAdmin WHERE loginUtilisateur=:ancienneloginUtilisateur");
-
+    $req_prep=Model::$pdo->prepare("UPDATE P_Utilisateurs SET loginUtilisateur=:loginUtilisateur, nomUtilisateur = :nomUtilisateur, prenomUtilisateur=:prenomUtilisateur, mdpUtilisateur=:mdpUtilisateur,estAdmin=:estAdmin,mailUtilisateur=:mailUtilisateur,nonce=:nonce WHERE loginUtilisateur=:loginUtilisateur");
     $values=array(
-      "ancienneloginUtilisateur" => $data->getloginUtilisateur(),
       "loginUtilisateur" => $this->loginUtilisateur,
       "nomUtilisateur" => $this->nomUtilisateur,
       "prenomUtilisateur" => $this->prenomUtilisateur,
       "mdpUtilisateur" => $this->mdpUtilisateur,
-      "estAdmin" => $this->estAdmin
+      "estAdmin" => $this->estAdmin,
+      "mailUtilisateur" => $this->mailUtilisateur,
+      "nonce" => $this->nonce
       );
     $req_prep->execute($values);
 
