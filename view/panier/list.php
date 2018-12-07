@@ -69,3 +69,5 @@
 
 </table>
 <h1 class='total'>Total : <?php echo "$total"; ?>€ </h1>
+
+<a href="index.php?controller=commande&action=created">Valider</a>
