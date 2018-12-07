@@ -19,7 +19,6 @@ class ControllerPanier{
 		$produit=ModelProduit::select($_GET['idProduit']);
 		if (isset($_COOKIE['Panier'])){
 			$tabcookie=unserialize($_COOKIE['Panier']);
-			var_dump($tabcookie);
 			$tabcookie[$_GET['idProduit']][1]=$tabcookie[$_GET['idProduit']][1]+1;
 		}
 		$tabcookie[$produit->getId()]=array($produit,1);

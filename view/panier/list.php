@@ -12,8 +12,7 @@
 	$total=0;
 	foreach($tabcookie as $key){
 		$idKey=$key[0]->getId();
-		if(isset($_POST["quantite"])){
-			var_dump($tabcookie[$idKey]);
+		if(isset($_POST["quantite"]) && $_POST["idProduitQte"]==$idKey){
 			$tabcookie[$idKey][1]=$_POST["quantite"];
 			$qte=$_POST["quantite"];
 			setcookie("Panier", serialize($tabcookie));
@@ -51,6 +50,7 @@
 				<td class="quantite">
 					<form method="post" action="index.php?controller=panier&action=readAll">
 						<input type="number" class="quantite" value="'.$qte.'" name="quantite" step="1" min="1" max="100">
+						<input type="hidden" name="idProduitQte" value="'.$idKey.'">
 						<input class="quantite" value="Ok" type="submit">
 					</form>
 					
