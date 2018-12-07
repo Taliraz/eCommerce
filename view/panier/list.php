@@ -15,10 +15,13 @@
 		if(isset($_POST["quantite"]) && $_POST["idProduitQte"]==$idKey){
 			$tabcookie[$idKey][1]=$_POST["quantite"];
 			$qte=$_POST["quantite"];
-			setcookie("Panier", serialize($tabcookie));
+			setcookie("Panier",serialize($tabcookie),time()+3600);
 		}
-		else $qte=$key[1];
-		$total=$total+$key[0]->getPrix()*$qte;
+		else {
+			$qte=$key[1];
+		}
+		$total=($total+$key[0]->getPrix()*$qte);
+		setcookie("Total",serialize($total),time()+3600);
 
 		echo '
 			<tr class="elements">
@@ -59,8 +62,8 @@
 				<a href="index.php?controller=panier&action=delete&idProduit='.$idKey.'">Supprimer du panier</a>
 				</td>
 			</tr>';
-	}
-	setcookie("Total",serialize($total),time()+3600);
+	};
+
 
 	 ?>
 
