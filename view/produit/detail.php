@@ -10,7 +10,7 @@ require_once File::build_path(array("model","ModelUtilisateur.php"));
 		<p> Pays: '.htmlspecialchars($p->getPays()).'</p>
 		<p><a href="index.php?controller=panier&action=add&idProduit='.$p->getId().'">Ajouter au Panier</a></P>';
    if(isset($_SESSION['loginUtilisateur']) && Session::is_admin()){
-	   echo '<p><a title="supprimer" href="index.php?controller=produit&action=delete&idproduit='.rawurlencode($p->getId()).'">supprimer</a></p>';
 	   echo '<p><a title="modifier" href="index.php?controller=produit&action=update&idproduit='.rawurlencode($p->getId()).'">modifier</a></p>';
+	   echo '<p><a title="supprimer" href="index.php?controller=produit&action=delete&idproduit='.rawurlencode($p->getId()).'">supprimer</a></p>';
 	}
   ?>
