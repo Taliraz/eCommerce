@@ -16,7 +16,6 @@
                 <a href="index.php?controller=panier&action=readAll"><li class="menu_button">Mon Panier</li></a>
                 <?php if(Session::is_admin()) {
                     echo '<a href="index.php?controller=Utilisateur&action=readAll"><li class="menu_button">Modération</li></a>';
-                    echo '<a href="index.php?controller=panier&action=readAll"><li class="menu_button">Mon Panier</li></a>';
                     echo '<a href="index.php?controller=Utilisateur&action=disconnect"><li class="menu_button" id="menu_button_from_right">Deconnexion</li></a>';
                 } 
                 else if (isset($_SESSION['loginUtilisateur']) && Session::is_user($_SESSION['loginUtilisateur'])) {
