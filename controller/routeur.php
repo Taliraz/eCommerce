@@ -2,6 +2,7 @@
 require (File::build_path(array("controller","ControllerProduit.php")));
 require (File::build_path(array("controller","ControllerUtilisateur.php")));
 require (File::build_path(array("controller","ControllerPanier.php")));
+require (File::build_path(array("controller","ControllerCommande.php")));
 
 if(isset($_GET['action'])) {
     $action = $_GET['action'];  
@@ -19,7 +20,7 @@ else {
 
 $controller_class="Controller".ucfirst($controller);
 if(!class_exists($controller_class)){
-	$controller_class="ControllerVoiture";
+	$controller_class="ControllerProduit";
 }
 
 if(in_array($action, get_class_methods($controller_class))){
