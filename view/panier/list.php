@@ -35,11 +35,6 @@
 						'.htmlspecialchars($key->getPrix()).'
 					</a>
 				</td>
-				<td class="quantite">
-					<a href="index.php?controller=produit&action=read&idProduit='.$key->getId().'">
-						'.htmlspecialchars($key->getCouleur()).'
-					</a>
-				</td>
 				<td class="delete_panier">
 				<a href="index.php?controller=panier&action=delete&idProduit='.$key->getId().'">Supprimer du panier</a>
 				</td>
