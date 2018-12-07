@@ -5,13 +5,16 @@
 		<th  style="border: 0px 1px;" class="poids">Poids</th>
 		<th  style="border: 0px 1px;" class="couleur">Couleur</th>
 		<th class="prix">Prix</th>
+		<th  style="border: 0px 1px;" class="quantite">Quantité</th>
 		<th class="vider"><a href="index.php?controller=panier&action=deleteAll">Vider le panier</a></th>
 	</tr>
 	<?php 
 	$total=0;
 	foreach($tabcookie as $key){
-		$total=$total+$key->getPrix();
-
+		if(isset($_POST["quantite"])){
+							$qte=$_POST["quantite"];
+						}
+						else $qte=1;
 		echo '
 			<tr class="elements">
 				<td class="image">
@@ -39,10 +42,22 @@
 						'.htmlspecialchars($key->getPrix()).'
 					</a>
 				</td>
+				<td class="quantite">
+					<form method="post" action="index.php?controller=panier&action=readAll">
+						<input type="number" class="quantite" value="'.$qte.'" name="quantite" step="1" min="1" max="100">
+						<input class="quantite" value="Ok" type="submit">
+					</form>
+					
+				</td>
 				<td class="delete_panier">
 				<a href="index.php?controller=panier&action=delete&idProduit='.$key->getId().'">Supprimer du panier</a>
 				</td>
 			</tr>';
+			if(isset($_POST["quantite"])){
+				$total=$total+$key->getPrix()*$qte;
+			}
+			else $total=$total+$key->getPrix();
+			
 
 	} ?>
 

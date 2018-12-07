@@ -12,6 +12,10 @@ body {
 .image_param {
 	height: 100px;
 }
+.quantite{
+	width: 40px;
+
+}
 
 .infos > th {
 	font-size: 24px;
