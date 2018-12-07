@@ -1,4 +1,6 @@
 <?php
-echo '<p>L\'utilisateur a bien été créé !</p>';
-$tab_v=ModelUtilisateur::selectAll();
-require(File::build_path(array("view","utilisateur","list.php")));
+$tab_p = ModelProduit::selectAll();    
+$controller='produit';
+$view='list';
+$pagetitle='liste des Produits';
+require(File::build_path(array("view","produit","list.php")));

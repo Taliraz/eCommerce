@@ -45,19 +45,6 @@ class ControllerUtilisateur {
         }
     }
 
-
-    public static function create(){
-        if (Session::is_admin()){
-            $controller='utilisateur';
-            $view='create';
-            $pagetitle='Creation de utilisateur';
-            require(File::build_path(array("view","view.php")));
-        }
-        else {
-            Self::readAll();
-        }
-    }
-
     public static function connect(){
         $controller='utilisateur';
         $view='connect';
@@ -72,22 +59,23 @@ class ControllerUtilisateur {
         ControllerProduit::readAll();
     }
 
+    public static function create(){
+        $controller='utilisateur';
+        $view='create';
+        $pagetitle='Creation de utilisateur';
+        require(File::build_path(array("view","view.php")));
+    }
 
     public static function created(){
-        if (Session::is_admin()){ 
-            $nonce=Security::generateRandomHex();
-            $mail='<h1>BIENVENUE</h1><p>Afin de valider votre inscription veuillez cliquer sur ce <a href="http://webinfo.iutmontp.univ-montp2.fr/~armangaus/eCommerce/index.php?controller=utilisateur&action=validate&nonce='.$nonce.'&loginUtilisateur='.$_POST['loginUtilisateur'].'">Lien</a></p>';
-            $ModelUtilisateur=new ModelUtilisateur($_POST['loginUtilisateur'],$_POST['nomUtilisateur'],$_POST['prenomUtilisateur'],Security::chiffrer($_POST['mdpUtilisateur']),false,$_POST['mailUtilisateur'],$nonce);
-            $ModelUtilisateur->save();
-            $controller='utilisateur';
-            $view='created';
-            $pagetitle='Utilisateur créé';
-            mail($_POST['mailUtilisateur'],"validation",$mail);
-            require(File::build_path(array("view","view.php")));
-        }
-        else{
-            Self::readAll();
-        }
+        $nonce=Security::generateRandomHex();
+        $mail='<h1>BIENVENUE</h1><p>Afin de valider votre inscription veuillez cliquer sur ce <a href="http://webinfo.iutmontp.univ-montp2.fr/~armangaus/eCommerce/index.php?controller=utilisateur&action=validate&nonce='.$nonce.'&loginUtilisateur='.$_POST['loginUtilisateur'].'">Lien</a></p>';
+        $ModelUtilisateur=new ModelUtilisateur($_POST['loginUtilisateur'],$_POST['nomUtilisateur'],$_POST['prenomUtilisateur'],Security::chiffrer($_POST['mdpUtilisateur']),false,$_POST['mailUtilisateur'],$nonce);
+        $ModelUtilisateur->save();
+        $controller='utilisateur';
+        $view='created';
+        $pagetitle='Utilisateur créé';
+        mail($_POST['mailUtilisateur'],"validation",$mail);
+        require(File::build_path(array("view","view.php")));
     }
     
     public static function update(){
@@ -148,7 +136,6 @@ class ControllerUtilisateur {
     public static function validate(){
         $user=ModelUtilisateur::select($_GET['loginUtilisateur']);
         if ($user!=false && $user->getNonce()==$_GET['nonce']){
-            echo 'test passé';
             $user->setNonce(NULL);
             echo $user->getNonce();
             $userBase=ModelUtilisateur::select($_GET['loginUtilisateur']);
