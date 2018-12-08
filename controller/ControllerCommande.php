@@ -60,6 +60,7 @@ class ControllerCommande {
         }
         $ModelCommande=new ModelCommande($_SESSION['loginUtilisateur'],unserialize($_COOKIE['Total']),$tabProduit);
         $ModelCommande->save();
+        $tab_p=ModelProduit::selectAll();
         $controller='produit';
         $view='list';
         $pagetitle='Commande créée';
@@ -67,6 +68,7 @@ class ControllerCommande {
     }
     else{
         echo 'vous devez être connecté et avoir des articles dans le panier';
+        $tab_p=ModelProduit::selectAll();
         $controller='produit';
         $view='list';
         $pagetitle='Commande créée';
