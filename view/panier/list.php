@@ -8,7 +8,7 @@
 		<th  style="border: 0px 1px;" class="quantite">Quantité</th>
 		<th class="vider"><a href="index.php?controller=panier&action=deleteAll">Vider le panier</a></th>
 	</tr>
-	<?php 
+	<?php
 	$total=0;
 	foreach($tabcookie as $key){
 		$idKey=$key[0]->getId();
@@ -30,7 +30,7 @@
 						<img src="'.$key[0]->getImage().'"alt="'.$idKey.'" class="image_param">
 					</a>
 				</td>
-				<td style="border: 0px 1px;" class="produit">
+				<td style="border:0px 1px;" class="produit">
 					<a href="index.php?controller=produit&action=read&idProduit='.$idKey.'">
 						'.$key[0]->getNom().'
 					</a>
@@ -56,16 +56,12 @@
 						<input type="hidden" name="idProduitQte" value="'.$idKey.'">
 						<input class="quantite" value="Ok" type="submit">
 					</form>
-					
 				</td>
 				<td class="delete_panier">
 				<a href="index.php?controller=panier&action=delete&idProduit='.$idKey.'">Supprimer du panier</a>
 				</td>
 			</tr>';
-	};
-
-
-	 ?>
+	};?>
 
 </table>
 <h1 class='total'>Total : <?php echo "$total"; ?>€ </h1>
