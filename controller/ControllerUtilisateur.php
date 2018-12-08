@@ -6,26 +6,44 @@ class ControllerUtilisateur {
 
 
     public static function readAll() {
-        $tab_v = ModelUtilisateur::selectAll();     //appel au modèle pour gerer la BD
-        $controller='utilisateur';
-        $view='list';
-        $pagetitle='liste des Utilisateurs';
-        require (File::build_path(array("view","view.php")));  //"redirige" vers la vue
+        if (isset($_SESSION['estAdmin']) && $_SESSION['estAdmin']){
+            $tab_v = ModelUtilisateur::selectAll();     //appel au modèle pour gerer la BD
+            $controller='utilisateur';
+            $view='list';
+            $pagetitle='liste des Utilisateurs';
+            require (File::build_path(array("view","view.php")));  //"redirige" vers la vue
+        }
+        else{
+            $tab_p=ModelProduit::selectAll();
+            $controller='produit';
+            $view='list';
+            $pagetitle='liste des Produits';
+            require (File::build_path(array("view","view.php")));
+        }
     }
 
      public static function read(){
         $v=ModelUtilisateur::select($_GET ['loginUtilisateur']);
-        if ($v==false){
-            $controller='utilisateur';
-            $view='erreur';
-            $pagetitle='Erreur';
-            require (File::build_path(array("view","view.php")));
+        if ((isset($_SESSION['loginUtilisateur']) && Session::is_user($_GET['loginUtilisateur'])) ||(isset($SESSION['estAdmin']) && $_SESSION['estAdmin'])){
+            if ($v==false){
+                $controller='utilisateur';
+                $view='erreur';
+                $pagetitle='Erreur';
+                require (File::build_path(array("view","view.php")));
+            }
+            else{
+                $controller='utilisateur';
+                $view='detail';
+                $pagetitle='Detail';
+                require(File::build_path(array("view","view.php")));
+            }
         }
         else{
-            $controller='utilisateur';
-            $view='detail';
-            $pagetitle='Detail';
-            require(File::build_path(array("view","view.php")));
+            $tab_p=ModelProduit::selectAll();
+            $controller='produit';
+            $view='list';
+            $pagetitle='liste des Produits';
+            require (File::build_path(array("view","view.php")));
         }
         
     }
@@ -41,7 +59,11 @@ class ControllerUtilisateur {
             require(File::build_path(array("view","view.php")));
         }
         else{
-            self::readAll();
+            $tab_p=ModelProduit::selectAll();
+            $controller='produit';
+            $view='list';
+            $pagetitle='liste des Produits';
+            require (File::build_path(array("view","view.php")));
         }
     }
 
