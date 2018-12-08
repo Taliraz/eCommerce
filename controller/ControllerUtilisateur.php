@@ -24,7 +24,7 @@ class ControllerUtilisateur {
 
      public static function read(){
         $v=ModelUtilisateur::select($_GET ['loginUtilisateur']);
-        if ((isset($_SESSION['loginUtilisateur']) && Session::is_user($_GET['loginUtilisateur'])) ||(isset($SESSION['estAdmin']) && $_SESSION['estAdmin'])){
+        if ((isset($_SESSION['loginUtilisateur']) && Session::is_user($_GET['loginUtilisateur'])) || (isset($_SESSION['estAdmin']) && $_SESSION['estAdmin'])){
             if ($v==false){
                 $controller='utilisateur';
                 $view='erreur';

@@ -16,10 +16,13 @@
                 <a href="index.php?controller=panier&action=readAll"><li class="menu_button">Mon Panier</li></a>
                 <?php if(Session::is_admin()) {
                     echo '<a href="index.php?controller=Utilisateur&action=readAll"><li class="menu_button">Modération</li></a>';
-                    echo '<a href="index.php?controller=Utilisateur&action=disconnect"><li class="menu_button" id="menu_button_from_right2">Deconnexion</li></a>';
+                    echo '<a href="index.php?controller=commande&action=readAll"><li class="menu_button">Commandes</li></a>';
+                    echo '<a href="index.php?controller=Utilisateur&action=disconnect"><li class="menu_button" id="menu_button_from_right">Deconnexion</li></a>';
+                    echo '<a href="index.php?controller=Utilisateur&action=read&loginUtilisateur='.$_SESSION['loginUtilisateur'].'"><li class="menu_button" id="menu_button_from_right2">Mon Profil</li></a>';
                 } 
                 else if (isset($_SESSION['loginUtilisateur']) && Session::is_user($_SESSION['loginUtilisateur'])) {
-                    echo '<a href="index.php?controller=Utilisateur&action=disconnect"><li class="menu_button" id="menu_button_from_right2">Deconnexion</li></a>';
+                    echo '<a href="index.php?controller=Utilisateur&action=disconnect"><li class="menu_button" id="menu_button_from_right">Deconnexion</li></a>';
+                    echo '<a href="index.php?controller=Utilisateur&action=read&loginUtilisateur='.$_SESSION['loginUtilisateur'].'"><li class="menu_button" id="menu_button_from_right2">Mon Profil</li></a>';
                 }
                 else {
                     echo '<a href="index.php?controller=Utilisateur&action=connect"><li class="menu_button" id="menu_button_from_right">Connexion</li></a>';

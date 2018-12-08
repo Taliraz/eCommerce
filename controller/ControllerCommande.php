@@ -5,27 +5,45 @@ class ControllerCommande {
 
 
 	public static function readAll() {
-        $tab_c = ModelCommande::getAllCommandes();    
-        $controller='commande';
-        $view='list';
-        $pagetitle='liste des Commandes';
-        require (File::build_path(array("view","view.php"))); 
+        if (isset($_SESSION['estAdmin']) && $_SESSION['estAdmin']){
+            $tab_c = ModelCommande::getAllCommandes();    
+            $controller='commande';
+            $view='list';
+            $pagetitle='liste des Commandes';
+            require (File::build_path(array("view","view.php"))); 
+        }
+        else{
+            $tab_p=ModelProduit::selectAll();
+            $controller='produit';
+            $view='list';
+            $pagetitle='Liste de produits';
+            require(File::build_path(array("view","view.php")));
+        }
     }
 
     public static function read(){
-    	$p=ModelCommande::getCommandeById($_GET ['idCommande']);
-    	if ($p==false){
-            $controller='commande';
-            $view='erreur';
-            $pagetitle='Erreur';
-    		require (File::build_path(array("view","view.php")));
-    	}
-    	else{
-            $controller='commande';
-            $view='detail';
-            $pagetitle='Detail';
-    		require(File::build_path(array("view","view.php")));
-    	}
+        if (isset($_SESSION['estAdmin']) && $_SESSION['estAdmin']){
+        	$p=ModelCommande::getCommandeById($_GET ['idCommande']);
+        	if ($p==false){
+                $controller='commande';
+                $view='erreur';
+                $pagetitle='Erreur';
+        		require (File::build_path(array("view","view.php")));
+        	}
+        	else{
+                $controller='commande';
+                $view='detail';
+                $pagetitle='Detail';
+        		require(File::build_path(array("view","view.php")));
+        	}
+        }
+        else{
+            $tab_p=ModelProduit::selectAll();
+            $controller='produit';
+            $view='list';
+            $pagetitle='Liste de produits';
+            require(File::build_path(array("view","view.php")));
+        }
     	
     }
     public static function create(){
