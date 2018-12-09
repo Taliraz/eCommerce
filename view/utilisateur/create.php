@@ -5,7 +5,7 @@
           <legend>Mon formulaire :</legend>
           <p>
             <label for="loginUtilisateur_id">login</label> :
-            <input type="text" placeholder="Ex : 256AB34" name="loginUtilisateur" id="loginUtilisateur_id" required/>
+            <input type="text" placeholder="" name="loginUtilisateur" id="loginUtilisateur_id" required/>
           </p>
           <p>
             <label for="mailUtilisateur_id">Email:</label>
@@ -14,11 +14,11 @@
 
           <p>
             <label for="nomUtilisateur_id">Nom</label> :
-            <input type="text" placeholder="Ex : bleu" name="nomUtilisateur" id="nomUtilisateur_id" required/>
+            <input type="text" placeholder="" name="nomUtilisateur" id="nomUtilisateur_id" required/>
           </p>
           <p>
             <label for="prenomUtilisateur_id">Prenom</label> :
-            <input type="text" placeholder="Ex : Opel" name="prenomUtilisateur" id="prenomUtilisateur_id" required/>
+            <input type="text" placeholder="" name="prenomUtilisateur" id="prenomUtilisateur_id" required/>
           </p>
 
           <p> 
